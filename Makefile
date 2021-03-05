@@ -1,4 +1,4 @@
 .PHONY : build
 
 build :
-	go build -o golang-web-app . & docker build . -t yuanhaojin_test
+	rm golang-web-app | docker rmi yuanhaojin_test | CGOENABLED=0 GOOS=linux GOARCH=amd64 go build -o golang-web-app . & docker build . -t yuanhaojin_test

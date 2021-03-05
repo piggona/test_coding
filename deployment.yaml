@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ginapp
+spec:
+  selector:
+    matchLabels:
+      app: ginapp
+  template:
+    metadata:
+      labels:
+        app: ginapp
+    spec:
+      containers:
+      - name: myapp
+        image: ajaxhe-demo-docker.pkg.coding.net/yuanhaojin_test/yuanhaojin_test/golang-gin-app:master-95f51eedcc8af0baa0909d3dc46a01f939c32518
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
