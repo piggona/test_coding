@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: ajaxhe-demo-docker.pkg.coding.net/yuanhaojin_test/yuanhaojin_test/golang-gin-app:master-95f51eedcc8af0baa0909d3dc46a01f939c32518
+        image: ajaxhe-demo-docker.pkg.coding.net/yuanhaojin_test/yuanhaojin_test/golang-gin-app:master-d9ed767bb7ed6ff7bb8db15f7af92aa6f12c7a03
         resources:
           limits:
             memory: "128Mi"
