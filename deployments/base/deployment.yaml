@@ -14,10 +14,6 @@ spec:
       containers:
       - name: myapp
         image: ajaxhe-demo-docker.pkg.coding.net/yuanhaojin_test/yuanhaojin_test/golang-gin-app:master-d9ed767bb7ed6ff7bb8db15f7af92aa6f12c7a03
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 8080
       imagePullSecrets:
