@@ -13,9 +13,9 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: ajaxhe-demo-docker.pkg.coding.net/yuanhaojin_test/yuanhaojin_test/golang-gin-app:master-d9ed767bb7ed6ff7bb8db15f7af92aa6f12c7a03
+        image: csighub.tencentyun.com/yuanhaojin/golang-web-app
         ports:
         - containerPort: 8080
       imagePullSecrets:
-        - name: regcred
+        - name: csighub
 
