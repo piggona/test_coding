@@ -4,3 +4,12 @@ patches:
 - path: replica.yaml
   target:
     kind: Deployment
+- path: resource.yaml
+  target:
+    kind: Deployment
+- path: roll.yaml
+  target:
+    kind: Deployment
+- path: service_port.yaml
+  target:
+    kind: Service
