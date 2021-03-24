@@ -1,0 +1,196 @@
+// Copyright 2019 Tencent Cloud authors.
+//
+// You may not use this file outside of Tencent Cloud project.
+
+syntax = "proto3";
+package template.v1;
+
+option go_package = "git.code.oa.com/too/too-service/apigen/template/v1;templates";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "qcloudapis/qcloud/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "qcloudapidoc/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "job template service";
+    version: "1.0";
+  };
+};
+
+// 云api版本，日期格式
+option (qcloudapidoc.options.version) = "2021-01-21";
+// 云图平台的产品名称
+option (qcloudapidoc.options.product_name) = "too";
+
+// JobTemplateService job与模版关联
+service JobTemplateService {
+  option (qcloudapidoc.options.service_opt) = {
+    cli_visibility:true,
+    sign_and_auth: true,
+    tags: ["too"]
+    error_codes: [
+      "InternalError.DbError",
+      "InternalError.System",
+      "InternalError.CosError",
+      "InvalidParameter",
+      "InternalError"
+    ]
+    system_params:[
+      "RequestId",
+      "Action",
+      "AppId",
+      "Uin",
+      "SubAccountUin",
+      "ClientIp",
+      "Region",
+      "Token",
+      "Version",
+      "Language"
+    ]
+  };
+
+  // DescribeJobTemplateDetail Job绑定的模版详情接口
+  rpc DescribeJobTemplateDetail(DescribeJobTemplateDetailRequest) returns (DescribeJobTemplateDetailResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "查询Job绑定模版信息"
+      doc_category:"Job与模版映射相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  };
+
+  // ModifyJobTemplate 新增和更新job绑定的模版
+  rpc ModifyJobTemplate(ModifyJobTemplateRequest) returns(google.protobuf.Empty)  {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "新增和更新job绑定模版"
+      doc_category:"Job与模版映射相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  };
+
+  // CreateValidateTask 创建模版校验队列
+  rpc CreateValidateTask(CreateValidateTaskRequest) returns(CreateValidateTaskResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "创建模版校验队列接口"
+      doc_category:"模版校验接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  }
+
+  // DescribeValidateResultDetail 查询模版校验任务队列详情
+  rpc DescribeValidateResultDetail(DescribeValidateResultDetailRequest) returns(DescribeValidateResultDetailResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "查询模版校验任务队列详情接口"
+      doc_category:"模版校验接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  }
+}
+
+// 模版类型
+enum TemplateType {
+  // 私有模版
+  Private = 0;
+  // 公有模版
+  Public = 1;
+}
+
+// Job绑定的模版详情
+message DescribeJobTemplateDetailRequest {
+  // 作业ID
+  string JobID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// job绑定模版的详情
+message DescribeJobTemplateDetailResponse {
+  // 源模版ID
+  string OriginTemplateID = 1;
+  // 模版内容
+  string Content = 2;
+  // 模版名称
+  string Name = 3;
+  // 模版描述
+  string Desc = 4;
+  // 模版类型[0:私有模版, 1:公有模版]
+  TemplateType OriginTemplateType = 5;
+  // 模版创建时间
+  google.protobuf.Timestamp CreateTime = 6;
+  // 模版更新时间
+  google.protobuf.Timestamp UpdateTime = 7;
+}
+
+// job与模版关联操作请求体
+message ModifyJobTemplateRequest {
+  // 作业ID
+  string JobID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 源模版ID
+  string OriginTemplateID = 2 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 模版内容
+  string Content = 3 [(qcloudapidoc.options.filed_opt) = {public:true, required:true}];
+  // 模板类型[Private:私有模版，Public:公有模版]
+  TemplateType Type = 4 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 创建模版校验队列参数
+message CreateValidateTaskRequest {
+  // 模版内容
+  string Content = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 创建模版校验队列响应体
+message CreateValidateTaskResponse {
+  // 事件ID
+  string EventID = 1;
+}
+
+// 模版校验队列响应体
+message DescribeValidateResultDetailRequest {
+  // 事件ID
+  string EventID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 模版校验事件详情
+message DescribeValidateResultDetailResponse {
+  // 事件ID
+  string EventID = 1;
+  // 控制台消息
+  string Console = 2;
+  // 队列状态
+  Status Status = 3;
+  // 模版校验是否成功
+  bool Success = 4;
+}
+
+// 队列执行状态
+enum Status {
+  // 执行中
+  Starting = 0;
+  // 执行结束
+  End = 1;
+}

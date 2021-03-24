@@ -1,0 +1,836 @@
+syntax = "proto3";
+
+package inventory.v1;
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "qcloudapidoc/options/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "apigen/examples;too";
+
+// 云api版本，日期格式
+option (qcloudapidoc.options.version) = "2021-01-21";
+// 云图平台的产品名称
+option (qcloudapidoc.options.product_name) = "too";
+
+service Tic {
+  option (qcloudapidoc.options.service_opt) = {
+    cli_visibility:true,
+    sign_and_auth: true,
+    tags: ["tic"]
+    error_codes: [
+      "InternalError.DbError",
+      "InternalError.System",
+      "InternalError.CosError",
+      "InvalidParameter",
+      "InternalError"
+    ]
+    system_params:[
+      "RequestId",
+      "Action",
+      "AppId",
+      "Uin",
+      "SubAccountUin",
+      "ClientIp",
+      "Region",
+      "Token",
+      "Version",
+      "Language"
+    ]
+  };
+
+  // 创建环境，host按照Tag导入方式
+  rpc CreateEnvironmentTag(CreateEnvironmentTagRequest) returns (CreateEnvironmentTagResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"创建Tag导入环境",
+      doc_category:"环境相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 创建环境，host按照CSV导入/添加ip方式
+  rpc CreateEnvironmentCSV(CreateEnvironmentCSVRequest) returns (CreateEnvironmentCSVResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"创建CSV导入环境",
+      doc_category:"环境相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 删除环境接口
+  rpc DeleteEnvironment(DeleteEnvironmentRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"删除环境",
+      doc_category:"环境相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 给环境中添加Host列表按照tag导入的方式接口
+  rpc AddHostsTag(AddHostsTagRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"添加Tag导入主机",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 给环境中添加Host列表按照CSV导入的方式接口
+  rpc AddHostsCSV(AddHostsCSVRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"添加CSV导入主机",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 删除环境中的Host列表接口
+  rpc DeleteHostsByEnvironment(DeleteHostsByEnvironmentRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"删除主机列表",
+      doc_category:"环境相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 修改环境相关信息接口
+  rpc ModifyEnvironment(ModifyEnvironmentRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"更新环境",
+      doc_category:"环境相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 修改环境删除标记接口
+  rpc ModifyEnvDeleteFlag(ModifyEnvDeleteFlagRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"更新环境删除标记",
+      doc_category:"环境相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 修改Host认证信息接口
+  rpc ModifyHosts(ModifyHostsRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"更新主机认证信息",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 修改Host基本信息接口
+  rpc ModifyHostsDetail(ModifyHostsDetailRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"更新主机基本信息",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 修改Host默认相关信息接口
+  rpc ModifyHostsDefault(ModifyHostsDefaultRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"更新主机默认认证信息",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 查询环境列表接口
+  rpc DescribeEnvironmentList(DescribeEnvironmentListRequest) returns (DescribeEnvironmentListResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"查询环境列表",
+      doc_category:"环境相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 查询环境详情接口
+  rpc DescribeEnvironmentDetail(DescribeEnvironmentDetailRequest) returns (DescribeEnvironmentDetailResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"查询环境详情",
+      doc_category:"环境相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 查询按照tag导入方式的Host列表接口
+  rpc DescribeEnvironmentHostTag(DescribeEnvironmentHostTagRequest) returns (DescribeEnvironmentHostTagResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"查询Tag导入主机列表",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 查询按照CSV导入方式的Host列表接口
+  rpc DescribeEnvironmentHostCSV(DescribeEnvironmentHostCSVRequest) returns (DescribeEnvironmentHostCSVResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"查询CSV导入主机列表",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 查询host列表接口
+  rpc DescribeHostList(DescribeHostListRequest) returns (DescribeHostListResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"查询主机列表",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 查询地域列表接口
+  rpc DescribeRegionList(google.protobuf.Empty) returns (DescribeRegionListResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"查询地域列表",
+      doc_category:"地域相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 查询环境简短信息列表接口
+  rpc DescribeShortEnvironmentList(google.protobuf.Empty) returns (DescribeShortEnvironmentListResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"查询环境简短信息列表",
+      doc_category:"环境相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 根据host信息反查hostID接口
+  rpc DescribeHostListByOtherField(DescribeHostListByOtherFieldRequest) returns (DescribeHostListByOtherFieldResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"查询主机ID列表",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+
+  // 根据环境id列表查询存在的环境id列表
+  rpc DescribeEnvIDList(DescribeEnvIDListRequest) returns (DescribeEnvIDListResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name:"查询环境ID列表",
+      doc_category:"主机相关接口"
+      error_codes:[
+        "InvalidParameter.ParamError",
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+    };
+  };
+}
+
+// 创建环境Host导入方式为Tag接口的请求.
+message CreateEnvironmentTagRequest {
+  // 环境名称
+  string    EnvName = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 环境描述
+  string    EnvDesc = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // host列表
+  repeated  EnvHostTag Hosts = 3 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 创建环境Host导入方式为Tag接口的返回结果.
+message CreateEnvironmentTagResponse {
+  // 创建条数
+  int32     Count = 1;
+}
+
+// 来源
+enum Source {
+  // tag导入
+  INTERNAL_IMPORT = 0;
+  // ip add
+  IP_ADD = 1;
+  // csv 导入
+  CSV_IMPORT = 2;
+}
+
+// 创建环境Host导入方式为CSV接口的请求.
+message CreateEnvironmentCSVRequest {
+  // 环境名称
+  string    EnvName = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 环境描述
+  string    EnvDesc = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // host列表
+  repeated  EnvHostCSV Hosts = 3 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}]; // host列表
+}
+
+// 创建环境Host导入方式为CSV接口的返回结果.
+message CreateEnvironmentCSVResponse {
+  // 创建条数
+  int32     Count = 1;
+}
+
+// 创建环境Host导入方式为Tag接口入参EnvHostTag.
+message EnvHostTag {
+  // 组
+  repeated string  GroupName = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 地域
+  string  Region = 2 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 实例id
+  string  InstanceID = 3[(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 实例name
+  string  InstanceName = 4[(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 公网ip
+  string  PublicIP = 5[(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 内网ip
+  string  PrivateIP = 6[(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 实例port
+  int32   InstancePort = 7 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // vpc_id
+  string  Vpc = 8 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 子网id
+  string  SubnetID = 9 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 主机用户名
+  string  Username = 10 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 主机密码 存储密文内容
+  string  Password = 11 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 来源,tag导入方式只能填入INTERNAL_IMPORT
+  Source  Source = 12 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  //是否使用默认密码
+  bool    IsDefaultPwd = 13 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 可用区
+  string  Zone = 14 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}] ;
+}
+
+// 创建环境Host导入方式为CSV接口入参EnvHostTag.
+message EnvHostCSV {
+  // 组
+  repeated string  GroupName = 1[(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 实例name
+  string  InstanceName = 2 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 实例ip
+  string  PublicIP = 3 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 实例port
+  int32   InstancePort = 4 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 主机用户名
+  string  Username = 5 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 主机密码 存储密文内容
+  string  Password = 6 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 来源,CSV导入方式和IP_ADD方式可填入IP_ADD、CSV_IMPORT
+  Source  Source = 7 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 是否使用默认密码
+  bool    IsDefaultPwd = 8[(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 云厂商
+  string  Provider = 9[(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 地域
+  string  Region = 10[(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 描述
+  string  HostDesc = 11[(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 删除环境请求.
+message DeleteEnvironmentRequest {
+  // 环境id
+  string EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 添加环境中的host列表(通过CSV或者IP_ADD的方式)请求.
+message AddHostsCSVRequest {
+  // 环境ID
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 主机列表
+  repeated  EnvHostCSV Hosts = 2 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 添加环境中的host列表(通过Tag导入的方式)请求.
+message AddHostsTagRequest {
+  // 环境ID
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 主机列表
+  repeated  EnvHostTag Hosts = 2 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 删除环境中Host列表请求.
+message DeleteHostsByEnvironmentRequest {
+  // 环境ID
+  string    EnvID = 1[(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 主机ID列表
+  repeated  EnvHostID HostIDs = 2 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// EnvHostID结构体.
+message EnvHostID {
+  // hostID 主机id
+  string  HostID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 修改环境请求.
+message ModifyEnvironmentRequest {
+  // 环境id
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 环境描述
+  string    EnvDesc = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 环境名称
+  string    EnvName = 3 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 修改环境删除标记
+message ModifyEnvDeleteFlagRequest {
+  // 环境id
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 环境删除标记
+  string    DeleteFlag = 2  [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 修改host认证信息请求.
+message ModifyHostsRequest {
+  // 环境id
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 更新用户名/密码的列表
+  repeated  ModifyEnvHost Hosts = 2 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 修改host基本信息请求
+message ModifyHostsDetailRequest {
+  // 环境id
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 更新host列表基本信息
+  repeated  ModifyHostDetail Hosts = 2 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 修改host默认用户名/密码/端口请求.
+message ModifyHostsDefaultRequest {
+  // 环境id
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 默认用户名
+  string    DefaultUserName = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 默认主机密码 存储密文内容
+  string    DefaultPassword = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 默认端口
+  int32     DefaultPort = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 修改host认证信息结构体.
+message ModifyEnvHost {
+  // 主机id
+  string  HostID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 用户名
+  string  UserName = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 主机密码 存储密文内容
+  string  Password = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 端口
+  int32   Port = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 是否使用默认密码
+  bool   IsDefaultPwd = 4 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 修改host基本信息结构体
+message ModifyHostDetail {
+  // 主机id
+  string  HostID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 云厂商
+  string  Provider = 2[(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 地域
+  string  Region = 3[(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 组
+  repeated string  GroupName = 4[(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  //描述
+  string  HostDesc = 5[(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询环境列表请求.
+message DescribeEnvironmentListRequest {
+  // 搜索条件
+  string  SearchWord = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 排序字段
+  string  OrderBy = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  //列表长度限制
+  int32   Limit = 3 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  //列表开始Index
+  int32   Offset = 4 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 查询环境列表响应结果.
+message DescribeEnvironmentListResponse {
+  // 总条数
+  int32     TotalCount = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 环境详情列表
+  repeated  Environment Environments = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 环境信息.
+message Environment {
+  // 环境id
+  string  EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 环境name
+  string  EnvName = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 环境描述
+  string  EnvDesc = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 该环境下实例数量
+  int32   InstanceCount = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 组名称,一个环境下可有多个group
+  repeated string  GroupNames = 5 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 创建时间
+  google.protobuf.Timestamp  CreateTime = 6 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 更新时间
+  google.protobuf.Timestamp  UpdateTime = 7 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 来源
+  Source  Source = 8 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询环境详情请求.
+message DescribeEnvironmentDetailRequest {
+  // 环境id
+  string   EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 查询环境详情响应结果.
+message DescribeEnvironmentDetailResponse {
+  // 环境id
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 环境name
+  string    EnvName = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 环境描述
+  string    EnvDesc = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 来源
+  Source    Source = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 组名称,一个环境下可有多个group
+  repeated string  GroupNames = 5 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 创建时间
+  google.protobuf.Timestamp  CreateTime = 6 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 更新时间
+  google.protobuf.Timestamp  UpdateTime = 7 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 该环境下实例数量
+  int32   InstanceCount = 8 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询环境中的CSV导入的host列表请求.
+message DescribeEnvironmentHostCSVRequest {
+  // 环境id
+  string   EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 过滤条件
+  repeated Filter  Filters = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  //列表长度限制
+  int32    Limit = 3 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  //列表开始Index
+  int32    Offset = 4 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 搜索条件
+  string   SearchWord = 5 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 排序字段
+  string   OrderBy = 6 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询过滤器
+message Filter {
+  // 需要过滤的字段
+  string Name = 1[(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 字段的过滤值
+  repeated string Values = 2[(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询环境中的CSV导入的host列表响应结果.
+message DescribeEnvironmentHostCSVResponse {
+  // 环境id
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // host列表
+  repeated  EnvHostCSVResp Hosts = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 总条数
+  int32     TotalCount = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 默认用户名
+  string    DefaultUserName = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 默认密码
+  string    DefaultPassword = 5 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 默认端口tPort
+  int32     DefaultPort = 6 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询环境中的Tag导入的host列表请求.
+message DescribeEnvironmentHostTagRequest {
+  // 环境id
+  string   EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 组名称
+  repeated Filter  Filters = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  //列表长度限制
+  int32    Limit = 3 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  //列表开始Index
+  int32    Offset = 4 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 搜索条件
+  string   SearchWord = 5 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 排序字段
+  string   OrderBy = 6 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询环境中的Tag导入的host列表响应结果.
+message DescribeEnvironmentHostTagResponse {
+  // 环境id
+  string    EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // host列表
+  repeated  EnvHostTagResp Hosts = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 总条数
+  int32     TotalCount = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 默认用户名
+  string    DefaultUserName = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 默认密码
+  string    DefaultPassword = 5 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 默认端口tPort
+  int32     DefaultPort = 6 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// Tag导入的host结构体.
+message EnvHostTagResp {
+  // 主机ID
+  string  HostID = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // hostTag
+  EnvHostTag HostTag = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// CSV导入的host结构体.
+message EnvHostCSVResp {
+  // 主机ID
+  string  HostID = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // hostTag
+  EnvHostCSV HostCSV = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询Host列表请求.
+message DescribeHostListRequest {
+  // hostID列表
+  repeated string HostIDs = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 查询Host列表响应结果.
+message DescribeHostListResponse {
+  // hostTag
+  repeated Host Hosts = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询Host列表响应的host结构体.
+message Host {
+  // 组
+  repeated string  GroupName = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 地域
+  string  Region = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 实例id
+  string  InstanceID = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 实例name
+  string  InstanceName = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 公网ip
+  string  PublicIP = 5 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 内网ip
+  string  PrivateIP = 6 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 实例port
+  int32   InstancePort = 7 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // vpc_id
+  string  Vpc = 8 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 子网id
+  string  SubnetID = 9 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 主机用户名
+  string  Username = 10 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 主机密码 存储密文内容
+  string  Password = 11 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 来源
+  Source  Source = 12 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  //是否使用默认密码
+  bool  IsDefaultPwd = 13 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // hostID
+  string  ID = 14 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 环境ID
+  string  EnvID = 15 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 可用区
+  string  Zone = 16 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 云厂商
+  string  Provider = 17 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  //描述
+  string  HostDesc = 18 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 云梯标记
+  string  YuntiFlag = 19 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询地域列表响应结果.
+message DescribeRegionListResponse {
+  // 可用区列表
+  repeated RegionDetail Regions = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 地域结构体.
+message RegionDetail {
+  // 地域id
+  string  RegionID = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 地域
+  string  Region = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 地域中文名称
+  string  RegionName = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 区域
+  string  Area = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 地域简称
+  string  RegionShortName = 5 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询简短环境信息响应结果.
+message DescribeShortEnvironmentListResponse {
+  // ShortEnvironment 列表
+  repeated ShortEnvironment ShortEnvironments = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 简短环境信息结构体.
+message ShortEnvironment {
+  // 环境id
+  string  EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 环境name
+  string  EnvName = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 来源
+  Source  Source = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// job根据host其他属性反查hostID接口请求.
+message DescribeHostListByOtherFieldRequest {
+  // 需要反查询的Host列表
+  repeated HostOtherField Hosts = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 反查询host信息请求结构体.
+message HostOtherField {
+  // 公网ip
+  string  PublicIP = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 内网ip
+  string  PrivateIP = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 实例port
+  int32   InstancePort = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // vpc_id
+  string  Vpc = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 子网id
+  string  SubnetID = 5 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  //地域
+  string  Region = 6[(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// job根据host其他属性反查hostID接口响应结果.
+message DescribeHostListByOtherFieldResponse {
+  // host列表
+  repeated Host Hosts = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 查询环境id请求
+message DescribeEnvIDListRequest {
+  // 环境ID列表
+  repeated string EnvID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 查询环境id响应
+message DescribeEnvIDListResponse {
+  // 环境ID列表
+  repeated string EnvID = 1[(qcloudapidoc.options.filed_opt) = {public:true}];
+}

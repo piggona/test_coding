@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ginapp
+  labels:
+    app: ginapp
+  namespace: ginapp
 spec:
   selector:
     matchLabels:
@@ -12,8 +15,8 @@ spec:
         app: ginapp
     spec:
       containers:
-      - name: myapp
-        image: csighub.tencentyun.com/yuanhaojin/golang-web-app
+      - name: ginapp
+        image: csighub.tencentyun.com/yuanhaojin/golang-web-app:v1.0.0
         ports:
         - containerPort: 8080
       imagePullSecrets:

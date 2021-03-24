@@ -1,0 +1,132 @@
+syntax = "proto3";
+
+package qcloudapiext;
+
+option go_package = "git.code.oa.com/pulse-line/qcloudapi-cloud-api/protoc-gen-qcloudapidoc/qcloudgenapi;qcloudapiext";
+
+// reference: http://tapd.oa.com/qcloud_api/markdown_wikis/show/#1210161711001746151
+
+
+/*
+x-tcapi-whole-process-token
+
+x-tcapi-category，文档目录也要与云图保持一致
+
+x-tcapi-examples
+
+x-tcapi-competitor-action
+
+x-tcapi-competitor-url
+
+x-tcapi-attribute-flag
+
+x-tcapi-errorcodes，errorcode要与云图上保持一致
+
+（以上字段如果接口确实不涉及，填写无即可）
+
+复杂对象：
+
+x-tcapi-is-used-for
+description
+ */
+
+
+message ServiceOperationExt{
+  // error_code要与云图上保持一致
+  repeated string error_codes = 1;
+
+  // x-tcapi-cli-visibility 接口是否对外可见，1可见
+  bool cli_visibility = 2;
+
+  //x-tcapi-is-auth，0只验签名，1签名加鉴权-> false:只签名；true:签名加鉴权
+  bool sign_and_auth = 3;
+
+  // x-tcapi-is-internal-service 是否内部接口，1是-> true:内部接口；fasle:外部接口
+  bool internal_service = 4;
+
+
+  // 接口tag，一般与产品名保持一致
+  repeated string tags = 9;
+
+  // x-tcapi-system-param:系统参数，默认为:["RequestId","Action","AppId","Uin","SubAccountUin","ClientIp","Version","Language"]
+  repeated string system_params = 10;
+
+  // x-tcapi-sec-rate, 限速
+  uint32 sec_rate = 11;
+}
+
+message ActionExt {
+  // x-tcapi-whole-process-token，全程票据，1是，0否
+  uint32 whole_process_token = 1;
+
+  // x-tcapi-category官网目录，与云图对应
+  string doc_category = 2;
+
+  repeated ActionExample examples = 3;
+
+  // x-tcapi-competitor-action：竞品接口名
+  string competitor_action = 4;
+
+  // x-tcapi-competitor-url: 竞品接口RUL
+  string competitor_url = 5;
+
+  // x-tcapi-errorcodes error_code要与云图上保持一致
+  repeated string error_codes = 7;
+
+  // x-tcapi-action-name 接口中文名
+  string  action_name = 8;
+
+  // x-tcapi-cli-visibility 接口是否对外可见，1可见
+  bool cli_visibility = 9;
+
+  //x-tcapi-is-auth，0只验签名，1签名加鉴权-> false:只签名；true:签名加鉴权
+  bool sign_and_auth = 10;
+
+  // x-tcapi-is-internal-service 是否内部接口，1是-> true:内部接口；fasle:外部接口
+  bool internal_service = 11;
+
+  // x-tcapi-doc-weight 文档权重
+  uint32 doc_weight = 12;
+
+  // 接口tag，一般与产品名保持一致
+  repeated string tags = 17;
+
+  // x-tcapi-action-label
+  string action_label = 18;
+
+  // x-tcapi-cam-resource
+  string cam_resource = 19;
+
+  // x-tcapi-cam-condition
+  string cam_condition = 20;
+
+  // x-tcapi-system-param:系统参数，默认为:["RequestId","Action","AppId","Uin","SubAccountUin","ClientIp","Version","Language"]
+  repeated string system_params = 21;
+
+  // x-tcapi-sec-rate, 限速
+  uint32 sec_rate = 22;
+}
+
+message MessageExt {
+  // x-tcapi-is-used-for 0入参 1出参 2既做出参也做入参
+  uint32 param_type = 1;
+}
+
+message FieldExt {
+  // 入参有效
+  // x-tcapi-is-public: 是否对外可见
+  bool public = 1;
+  // 出参有效
+  bool nullable = 2;
+  // 必填，入参有效
+  bool required = 3;
+  // 默认值
+  string default = 4;
+}
+
+message ActionExample {
+  string input = 1;
+  string output = 2;
+  string description = 3;
+  string title = 4;
+}

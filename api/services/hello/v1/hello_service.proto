@@ -1,0 +1,43 @@
+// Copyright 2019 Tencent Cloud authors.
+//
+// You may not use this file outside of Tencent Cloud project.
+
+syntax = "proto3";
+package hello.v1;
+
+option go_package = "git.code.oa.com/yuanhaojin/test_coding/apigen/hello/v1;hello";
+import "google/api/annotations.proto";
+import "qcloudapis/qcloud/annotations.proto";
+import "third_party/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "hello service";
+    version: "1.0";
+  };
+};
+
+
+// Hello Service
+service HelloService {
+  // Hello Stub
+  rpc Hello(HelloRequest) returns (HelloResponse) {
+    option (google.api.http) = {
+      post: "/v1/hello"
+      body: "*"
+    };
+
+    option (qcloudapis.qcloud.v3) = {
+      path: "/qcloudapi/v1:Hello"
+    };
+  };
+}
+
+message HelloRequest {
+  string        message = 1 [(validate.rules).string.min_len = 3];
+}
+
+message HelloResponse {
+  string         message = 1;
+}

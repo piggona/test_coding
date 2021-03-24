@@ -1,0 +1,316 @@
+// Copyright 2019 Tencent Cloud authors.
+//
+// You may not use this file outside of Tencent Cloud project.
+
+syntax = "proto3";
+package template.v1;
+
+option go_package = "git.code.oa.com/too/too-service/apigen/template/v1;templates";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "qcloudapidoc/options/annotations.proto";
+import "api/qcloud-apiv3/template/v1/job_template.proto";
+
+// 云api版本，日期格式
+option (qcloudapidoc.options.version) = "2021-01-21";
+// 云图平台的产品名称
+option (qcloudapidoc.options.product_name) = "too";
+
+// TemplateService 模版操作接口
+service TemplateService {
+  option (qcloudapidoc.options.service_opt) = {
+    cli_visibility:true,
+    sign_and_auth: true,
+    tags: ["too"]
+    error_codes: [
+      "InternalError.DbError",
+      "InternalError.System",
+      "InternalError.CosError",
+      "InvalidParameter",
+      "InternalError"
+    ]
+    system_params:[
+      "RequestId",
+      "Action",
+      "AppId",
+      "Uin",
+      "SubAccountUin",
+      "ClientIp",
+      "Region",
+      "Token",
+      "Version",
+      "Language"
+    ]
+  };
+
+  // CreateTemplate 创建模版接口
+  rpc CreateTemplate(CreateTemplateRequest) returns (CreateTemplateResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "创建私有模版"
+      doc_category:"私有模版相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  };
+
+  // DescribePrivateTemplateList 私有模版列表展示接口
+  rpc DescribePrivateTemplateList(DescribePrivateTemplateListRequest) returns (DescribePrivateTemplateListResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "查询私有模版列表"
+      doc_category:"私有模版相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  };
+
+  // DescribePrivateTemplateDetail 私有模版详情接口
+  rpc DescribePrivateTemplateDetail(DescribeTemplateDetailRequest) returns (DescribePrivateTemplateDetailResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "查询私有模版详情"
+      doc_category:"私有模版相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  };
+
+  // DescribePublicTemplateList 公有模版列表展示接口
+  rpc DescribePublicTemplateList(DescribePublicTemplateListRequest) returns (DescribePublicTemplateListResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "查询公有模版列表"
+      doc_category:"公有模版相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  };
+
+  // DescribePublicTemplateDetail 公有模版详情接口
+  rpc DescribePublicTemplateDetail(DescribeTemplateDetailRequest) returns (DescribePublicTemplateDetailResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "查询公有模版详情"
+      doc_category:"公有模版相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  };
+
+  // ModifyTemplate 私有模版更新接口
+  rpc ModifyTemplate(ModifyTemplateRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "更新私有模版信息"
+      doc_category:"私有模版相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  };
+
+  // DeleteTemplate 删除模版接口
+  rpc DeleteTemplate(DeleteTemplateRequest) returns (google.protobuf.Empty) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "删除私有模版"
+      doc_category:"私有模版相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  }
+
+  // DescribeShortTemplateList 按照类型查询模版的名称和ID
+  rpc DescribeShortTemplateList(DescribeShortTemplateListRequest) returns (DescribeShortTemplateListResponse) {
+    option (qcloudapidoc.options.method_opt) = {
+      action_name: "查询模版名称列表"
+      doc_category:"模版相关接口"
+      error_codes:[
+        "InternalError.DbError",
+        "InternalError.System",
+        "FailedOperation.HttpRequestError",
+        "InvalidParameter"
+      ]
+      tags: ["too"]
+    };
+  }
+}
+
+// 创建模版的请求参数
+message CreateTemplateRequest {
+  // 模版内容
+  string Content = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 模版名称
+  string Name = 2 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 模版描述
+  string Desc = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 模版操作响应体
+message CreateTemplateResponse {
+  // 模版ID
+  string TemplateID = 1;
+}
+
+
+// 私有模版列表请求参数
+message DescribePrivateTemplateListRequest  {
+  // 搜索关键词
+  string SearchKey = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 排序字段
+  string OrderBy = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 分页，每页显示条目数
+  int32 Limit = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 分页，当前页偏移量
+  int32 Offset = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 私有模版列表响应体
+message DescribePrivateTemplateListResponse {
+  // 数据总数
+  int32 TotalCount = 1;
+  // 列表数据
+  repeated PrivateTemplateBaseInfo PrivateTemplateList = 2;
+}
+
+// 私有模版基础信息
+message PrivateTemplateBaseInfo {
+  // 模版ID
+  string TemplateID = 1;
+  // 模版名称
+  string Name = 2;
+  // 版本号
+  string Version = 3;
+  // 模版描述
+  string Desc = 4;
+  // 创建时间
+  google.protobuf.Timestamp CreateTime = 5;
+  // 更新时间
+  google.protobuf.Timestamp UpdateTime = 6;
+}
+
+// 查询模版详情请求参数
+message DescribeTemplateDetailRequest {
+  // 模版ID
+  string TemplateID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 私有模版详情
+message DescribePrivateTemplateDetailResponse {
+  // 私有模版基础信息
+  PrivateTemplateBaseInfo BaseInfo = 1;
+  // 私有模版内容
+  string Content = 2;
+}
+
+
+// 公有模版列表请求参数
+message DescribePublicTemplateListRequest {
+  // 搜索关键词
+  string SearchKey = 1 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 排序字段
+  string OrderBy = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 分页，每页显示条目数
+  int32 Limit = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 分页，当前页偏移量
+  int32 Offset = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 更新模版请求体
+message ModifyTemplateRequest {
+  // 模版ID
+  string TemplateID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+  // 模版内容
+  string Content = 2 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 模版名称
+  string Name = 3 [(qcloudapidoc.options.filed_opt) = {public:true}];
+  // 模版描述
+  string Desc = 4 [(qcloudapidoc.options.filed_opt) = {public:true}];
+}
+
+// 删除模版请求参数
+message DeleteTemplateRequest {
+  // 模版ID
+  string TemplateID = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 公有模版响应体
+message DescribePublicTemplateListResponse {
+  // 数据总数
+  int32 TotalCount = 1;
+  // 列表数据
+  repeated PublicTemplateBaseInfo PublicTemplateList = 2;
+}
+
+// 公有模版基础信息
+message PublicTemplateBaseInfo {
+  // 模版ID
+  string TemplateID = 1;
+  // 模版名称
+  string Name = 2;
+  // 版本号
+  string Version = 3;
+  // 模版描述
+  string Desc = 4;
+  // 创建时间
+  google.protobuf.Timestamp CreateTime = 5;
+  // 更新时间
+  google.protobuf.Timestamp UpdateTime = 6;
+}
+
+// 公有模版详情
+message DescribePublicTemplateDetailResponse {
+  // 公有模版基础信息
+  PublicTemplateBaseInfo BaseInfo = 1;
+  // 公有模版内容
+  string Content = 2;
+}
+
+// 获取模板简明信息请求体
+message DescribeShortTemplateListRequest {
+  // 模板类型[Private:私有模版，Public:公有模版]
+  TemplateType Type = 1 [(qcloudapidoc.options.filed_opt) = {public:true,required:true}];
+}
+
+// 获取模板简明信息响应体
+message DescribeShortTemplateListResponse {
+  // 模板名称和ID列表
+  repeated ShortTemplate  ShortTemplateList = 1;
+}
+
+// 简明模板
+message ShortTemplate {
+  // ID
+  string TemplateID = 1;
+  // 名称
+  string Name = 2;
+}

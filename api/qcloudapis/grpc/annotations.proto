@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package qcloudapis.grpc;
+option go_package = "git.code.oa.com/pulse-line/pl_qcloudapi_v3/qcloud-genapis/grpc";
+
+
+import "google/protobuf/descriptor.proto";
+
+
+message Service {
+    //Monitor监控: "请求量ID,失败ID,200ms请求量ID,400ms请求量,800ms请求量
+    string attr = 1;
+    //自定以扩展自动,针对Service的静态配置:比如角色控制(注意:业务自定义防止含义冲突)
+    //当你要一个针对每个Service的配置表示可用ext在pb中实现
+    string ext = 2;
+}
+
+extend google.protobuf.ServiceOptions {
+    Service service = 50002;
+}
+
+message ServiceMethod {
+    //Monitor: "请求量ID,耗时ID,失败ID
+    string attr = 1;
+    //自定以扩展自动,针对Method的静态配置:比如角色控制(注意:业务自定义防止含义冲突)
+    //当你要一个针对每个Method的配置表示可用ext在pb中实现
+    string ext = 2;
+}
+
+extend google.protobuf.MethodOptions {
+    ServiceMethod method = 50003;
+}

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package qcloudapidoc.options;
+
+import "google/protobuf/descriptor.proto";
+import "qcloudapidoc/qcloudapi_extension.proto";
+
+option go_package = "git.code.oa.com/pulse-line/qcloudapi-cloud-api/protoc-gen-qcloudapidoc/qcloudgenapi/options;options";
+
+extend google.protobuf.FileOptions {
+  string product_name = 1025;
+  string version = 1026;
+}
+
+extend google.protobuf.ServiceOptions {
+  qcloudapiext.ServiceOperationExt service_opt = 1024;
+}
+
+extend google.protobuf.MethodOptions {
+  qcloudapiext.ActionExt method_opt = 1024;
+}
+
+extend google.protobuf.MessageOptions {
+  qcloudapiext.MessageExt message_opt = 1024;
+}
+
+extend google.protobuf.FieldOptions {
+  qcloudapiext.FieldExt filed_opt = 1024;
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package qcloudapis.qcloud;
+
+option go_package = "git.code.oa.com/pulse-line/pl_qcloudapi_v3/qcloud-genapis/qcloud";
+
+
+import "google/protobuf/descriptor.proto";
+
+
+message ApiV3Rule {
+    string path = 1;
+    repeated ApiV3Rule additional_bindings = 2;
+}
+
+extend google.protobuf.MethodOptions {
+    ApiV3Rule v3 = 50001;
+}
