@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ginapp
-        image: csighub.tencentyun.com/yuanhaojin/golang-web-app:v1.0.0
+        image: csighub.tencentyun.com/yuanhaojin/golang-web-app
         ports:
         - containerPort: 8080
       imagePullSecrets:
