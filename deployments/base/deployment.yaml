@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: ginapp
-        image: csighub.tencentyun.com/yuanhaojin/golang-web-app
+        image: ajaxhe-demo-docker.pkg.coding.net/yuanhaojin_test/yuanhaojin_test/golang-gin-app:master-9c86ae16008bf448a530e728a11203a58f00371e
         ports:
         - containerPort: 8080
       imagePullSecrets:
-        - name: csighub
+        - name: coding-docker
 
