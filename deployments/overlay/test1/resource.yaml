@@ -5,10 +5,14 @@ metadata:
   labels:
     app: ginapp
 spec:
-  resources:
-    limits:
-      cpu: 500m
-      memory: 256Mi
-    requests:
-      cpu: 100m
-      memory: 64Mi
+  template:
+    spec:
+      containers:
+      - name: ginapp
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
