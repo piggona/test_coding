@@ -20,5 +20,5 @@ spec:
         ports:
         - containerPort: 8080
       imagePullSecrets:
-        - name: coding-regcred
+        - name: coding-docker
 
